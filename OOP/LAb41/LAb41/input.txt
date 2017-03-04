@@ -1,0 +1,12 @@
+Cylinder 10 20.1 1200.0
+Cone 17 8.4 1100.0
+Parallelepiped 1 2 3 200.0
+Compound
+	Sphere 20.2 450.0
+	Cone 36 10 251.36
+	Compound
+		Cone 1 52 58.1
+		Parallelepiped 4 5 6 698.0
+	end
+end
+Cylinder 10 6 1050.0
