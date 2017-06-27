@@ -8,6 +8,7 @@
 std::string HtmlDecode(std::string html);
 void Replace(std::string& str, const std::string& from, const std::string& to);
 
+
 int main(int argc, char** argv)
 {
 	std::string html;
@@ -29,14 +30,11 @@ std::string HtmlDecode(std::string html)
 												{ "&gt;", ">" },
 												{ "&amp;", "&" } };
 
+	for (auto pair : mapDec) 
+	{
+		Replace(html, pair.first, pair.second);
+	}
 
-	//map сущность html - key, value  то что заменить
-
-	Replace(html, "&quot;", "\"");
-	Replace(html, "&apos;", "'");
-	Replace(html, "&lt;", "<");
-	Replace(html, "&gt;", ">");
-	Replace(html, "&amp;", "&");
 	return html;
 }
 
