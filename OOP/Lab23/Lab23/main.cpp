@@ -1,7 +1,10 @@
 #include <iostream>
-#include <fstream> 
-
+#include <fstream>
+#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/split.hpp>
 #include "dictionary.h"
+
+#include <vector>
 
 
 
@@ -9,7 +12,8 @@ int main(int argc, char** argv)
 {
 	setlocale(LC_ALL, "Russian");
 	bool needToUpdate = true;
-	std::string name = "dictionary.txt"; //передавать путь к файлу в кач аргумента командной строки
+	std::string name = "dictionary.txt"; 
+	//передавать путь к файлу в кач аргумента командной строки
 	if (argc == 2)
 	{
 		name = argv[1];
@@ -19,17 +23,19 @@ int main(int argc, char** argv)
 			std::cout << "input file not found" << std::endl;
 			return 1;
 		}
-
+		//std::vector <std::string, std::string> results;
 		char cStr[1024]; //убрать
 		while (!istream.eof())
 		{
 			istream.getline(cStr, 1024);
 			std::string str(cStr);
 			int position = str.find(':');//todo: boost split
+
 			if (position != -1) 
 			{
 				dictionary[str.substr(0, position - 1)] = str.substr(position + 2, str.length() - position - 2);
 			}
+			//boost::split(results, str, boost::is_any_of(":"));
 		}
 		needToUpdate = false;
 	}

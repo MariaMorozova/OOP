@@ -2,37 +2,34 @@
 #include <fstream> 
 #include <vector>
 #include <string>
+#include <map>
+
 
 std::string HtmlDecode(std::string html);
 void Replace(std::string& str, const std::string& from, const std::string& to);
 
 int main(int argc, char** argv)
 {
-	std::ifstream istream("input.txt"); //ввод с консоли
-	if (!istream.is_open())
-	{
-		std::cout << "input file not found" << std::endl;
-		system("pause");
-		return 1;
-	}
-
-	char cNum[256]; //std::string
-	istream.getline(cNum, 256); //изменить cNum
-
-	istream.close();//
-	std::string html(cNum);//
+	std::string html;
+	std::cout << "Enter the string which you want to decode" << std::endl;
+	std::getline(std::cin, html);
 
 	std::string decodeStr = HtmlDecode(html);
 
-	std::ofstream ostream("output.txt");//
-	ostream << decodeStr;//
-	ostream.close();//
-	//вывод в консоль
+	std::cout << decodeStr << std::endl;
+
 	return 0;
 }
 
 std::string HtmlDecode(std::string html)
 {
+	std::map <std::string, std::string> mapDec{ { "&quot;", "\"" },
+												{ "&apos;", "'" },
+												{ "&lt;", "<" },
+												{ "&gt;", ">" },
+												{ "&amp;", "&" } };
+
+
 	//map сущность html - key, value  то что заменить
 
 	Replace(html, "&quot;", "\"");
